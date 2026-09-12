@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  title="The Missing Guarantee — Shaurya Vijay Sinha"
+  description="A proposed AI and Deep-Tech Survival Bridge Guarantee (ADSBG) for India, stress-tested against a Year-1 fiscal exposure model."
+>
+  <article class="section section--tight">
+    <div class="wrap prose">
+      <p class="eyebrow">Credit-guarantee design · NFPRC research</p>
+      <h1>The Missing Guarantee</h1>
+      <p style="font-size:1.05rem; font-style:italic; color:var(--body-text); margin-top:-0.4em;">
+        A credit instrument for India's AI and deep-tech sector, argued against
+        Girish Kuber's <em>The Tatas: How a Family Built a Business and a Nation</em>.
+      </p>
+
+      <div class="key-finding">
+        <p class="key-finding__label">Key finding, from the accompanying feasibility model</p>
+        <p class="key-finding__figure">Rs 195 Cr Year-1 shortfall</p>
+        <p class="key-finding__context">
+          At base-case assumptions — 200 loans, an average ticket of Rs 15 crore,
+          75% guarantee cover, a 2.5% annual fee, and a 15% default rate — the
+          scheme collects Rs 75 crore in premium against an expected claim payout
+          of Rs 270 crore, net of recovery. The fee alone does not cover Year-1
+          losses; either the fee rises, or the government accepts a subsidised
+          early phase, the way CGSS's champion-sector fee cut already does.
+        </p>
+      </div>
+
+      <h2>The parallel</h2>
+      <p>
+        In 1906–07, Sir Dorabji Tata went to London to raise capital for what
+        became Tata Iron and Steel. British bankers turned him down — an
+        unproven Indian steel venture was not a risk they were willing to
+        price. What actually funded TISCO was a public share issue, absorbed by
+        Indian retail investors on swadeshi sentiment rather than institutional
+        confidence, and the company ran at a loss for years before wartime
+        steel demand made the bet pay off.
+      </p>
+      <p>
+        Strip away the nationalism and it's a capital-markets story: a
+        technically unproven, capital-intensive project with a long wait before
+        any payoff, funded only because informal capital stepped in where
+        formal lenders wouldn't. That is close to the shape of an Indian AI or
+        deep-tech startup today — and the resemblance is not a coincidence so
+        much as a pattern that recurs whenever India tries to build frontier
+        industry with no precedent to underwrite against.
+      </p>
+
+      <h2>Why the existing schemes don't fit</h2>
+      <p>
+        India already runs credit guarantees purpose-built for specific gaps:
+        CGTMSE for MSMEs, CGSS for DPIIT-recognised startups, CGFMU for
+        first-generation entrepreneurs via Mudra loans, ECGC for exporters,
+        NABARD's equivalent for agriculture. None of them fit AI and deep-tech,
+        because none were priced for this risk profile. CGTMSE assumes a
+        borrower with predictable revenue inside a year or two; an AI company
+        with no revenue for three to five years is asking a lender to judge
+        whether unproven technology will eventually work, not whether a
+        business will repay on schedule. Ordinary credit underwriting answers
+        the second question. It has no tools for the first.
+      </p>
+
+      <h2>The proposal</h2>
+      <p>
+        An AI and Deep-Tech Survival Bridge Guarantee (ADSBG) would work on the
+        same logic as CGTMSE and CGSS: government does not fund companies
+        directly, it provides a partial loss guarantee funded by a small annual
+        premium, so private lenders and investors take on risk they would
+        otherwise avoid. The design difference is eligibility: instead of
+        revenue history, ADSBG would gate on independently certified Technology
+        Readiness Levels, verified by a Technical Evaluation Committee drawn
+        from the IITs, IISc, and MeitY — decoupling technical assessment from
+        credit risk, so lenders underwrite financial execution and not the
+        underlying science. Because pre-revenue deep-tech firms can't service
+        standard monthly principal and interest, the guarantee would sit
+        specifically around venture debt, convertible notes, or loans carrying
+        extended moratoriums of three to five years.
+      </p>
+
+      <div class="exhibit">
+        <img src="/images/adsbg-chart-2.png" alt="Line chart comparing ADSBG's projected cumulative exposure against CGSS's actual growth trajectory over ten years, both starting near zero and ADSBG rising faster." loading="lazy" />
+        <figcaption>Exhibit — ADSBG's projected exposure modelled on CGSS's early trajectory (40% annual growth from a Year-1 base of Rs 2,250 crore), not CGTMSE's mature, decades-old scale.</figcaption>
+      </div>
+
+      <h2>What the model is actually measuring</h2>
+      <p>
+        The Year-1 shortfall isn't an argument against the scheme — CGTMSE and
+        CGSS aren't designed to turn a profit either; the premiums collected
+        only aim to cover expected losses. The real return is second-order:
+        companies that survive the early funding gap go on to create jobs, pay
+        taxes, and attract further private capital. There's no clean study
+        proving how much CGTMSE alone contributed to the MSME sector's scale,
+        and ADSBG's success shouldn't be judged by revenue either — only by how
+        many companies it helps survive that would otherwise have failed.
+      </p>
+      <p>
+        The scale of the gap is what makes the case. India's cumulative
+        private AI investment sits at roughly $11.1 billion against $470.9
+        billion in the US and $119.3 billion in China over the same window —
+        2.4% and 9.3% of those figures respectively. That gap, not ambition, is
+        what ADSBG is built to close.
+      </p>
+    </div>
+  </article>
+
+  <section class="section--tight">
+    <div class="wrap" style="display:flex; gap:var(--space-3); flex-wrap:wrap; align-items:center; justify-content:space-between; border-top:1px solid var(--rule); padding-top:var(--space-3);">
+      <p style="margin:0; max-width:32rem;">Download the feasibility model — benchmark data, the Year-1 exposure calculator, a 10-year growth projection, and the funding-gap sourcing, all with linked citations.</p>
+      <a class="btn btn--solid" href="/files/ADSBG_Feasibility_Model.xlsx" download>Download the model (.xlsx)</a>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="wrap">
+      <a href="/research/">← Back to Research</a>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,71 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Shaurya Vijay Sinha — B.Com (Hons) student, St. Xavier's College, Kolkata. Fiscal modelling, credit-guarantee policy research, and consulting casework en route to investment banking."
+} = Astro.props;
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/experience/', label: 'Experience' },
+  { href: '/research/', label: 'Research' },
+  { href: '/writing/', label: 'Writing' },
+  { href: '/contact/', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f5eedd" />
+    <ClientRouter />
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="wrap masthead__row">
+        <a href="/" class="wordmark" style="text-decoration:none;">
+          Shaurya Vijay Sinha<span>notes on credit, capital &amp; policy</span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          {navItems.map((item) => (
+            <a
+              href={item.href}
+              aria-current={currentPath === item.href ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main transition:animate="fade">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p style="margin:0;">© {new Date().getFullYear()} Shaurya Vijay Sinha.</p>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/shaurya-vijay-sinha/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://substack.com/@shauryavijaysinha" target="_blank" rel="noopener noreferrer">Substack</a>
+          <a href="https://swarajyamag.com/author/2460159/shaurya-vijay-sinha" target="_blank" rel="noopener noreferrer">Swarajya</a>
+          <a href="mailto:shauryavijaysinha@gmail.com">Email</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
