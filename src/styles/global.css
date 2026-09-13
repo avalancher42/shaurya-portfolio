@@ -3,9 +3,10 @@
    ========================================================================== */
 :root {
   --bg: #f5eedd;
-  --bg-raised: #faf5e9;
+  --bg-raised: #faf6ec;
   --ink: #16587b;
   --ink-strong: #0d3d57;
+  --navy: #003366;
   --body-text: #2c5670;
   --rule: #84b3ce;
   --rule-soft: #cfe0e9;
@@ -22,6 +23,10 @@
   --space-4: 2.75rem;
   --space-5: 4.5rem;
   --space-6: 7rem;
+
+  --shadow-sm: 0 1px 2px rgba(13, 61, 87, 0.07), 0 2px 8px rgba(13, 61, 87, 0.05);
+  --shadow-md: 0 4px 10px rgba(13, 61, 87, 0.08), 0 10px 28px rgba(13, 61, 87, 0.07);
+  --shadow-lift: 0 10px 24px rgba(13, 61, 87, 0.14);
 }
 
 * {
@@ -52,7 +57,24 @@ body {
   font-size: 1.0625rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  position: relative;
 }
+
+/* Faint page-wide graph-paper texture — a quiet nod to "notes on credit,
+   capital & policy" without competing with content. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(to right, rgba(132, 179, 206, 0.35) 0 1px, transparent 1px 96px),
+    repeating-linear-gradient(to bottom, rgba(132, 179, 206, 0.35) 0 1px, transparent 1px 96px);
+  opacity: 0.05;
+}
+
+.masthead, main, .site-footer { position: relative; z-index: 1; }
 
 h1, h2, h3, h4 {
   font-family: var(--serif);
@@ -105,6 +127,8 @@ img { max-width: 100%; display: block; }
   max-width: var(--max-width);
   margin-inline: auto;
   padding-inline: var(--space-3);
+  position: relative;
+  z-index: 1;
 }
 
 .prose { max-width: var(--measure); }
@@ -138,6 +162,49 @@ section + section { border-top: 1px solid var(--rule-faint); }
   margin: 0 0 var(--space-1);
 }
 
+/* Scroll-triggered reveal — subtle fade + rise, applied via JS adding
+   .is-visible when a .reveal element enters the viewport. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Section background photography (placeholders)
+   Drop a real image at the referenced path later — opacity, sizing and the
+   tint overlay are already tuned so no further layout work is needed.
+   ========================================================================== */
+.section-media {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  mix-blend-mode: luminosity;
+  pointer-events: none;
+}
+
+.bg-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 51, 102, 0.35) 0%, rgba(245, 238, 221, 0.92) 78%);
+}
+
+.section-media > .wrap { position: relative; z-index: 1; }
+
 /* ==========================================================================
    Masthead / nav
    ========================================================================== */
@@ -157,19 +224,22 @@ section + section { border-top: 1px solid var(--rule-faint); }
   gap: var(--space-3);
 }
 
-.wordmark {
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: var(--ink-strong);
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.7em;
+  text-decoration: none;
   white-space: nowrap;
 }
 
-.wordmark span {
-  color: var(--body-text);
-  font-weight: 400;
-  font-style: italic;
-  font-size: 0.95rem;
-  margin-left: 0.6em;
+.brand__mark {
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-strong);
+  border: 1px solid var(--ink-strong);
+  padding: 0.12em 0.4em;
+  line-height: 1;
 }
 
 .nav {
@@ -180,15 +250,26 @@ section + section { border-top: 1px solid var(--rule-faint); }
 }
 
 .nav a {
+  position: relative;
   color: var(--ink);
   text-decoration: none;
-  padding-bottom: 2px;
-  border-bottom: 1px solid transparent;
+  padding-bottom: 3px;
 }
 
-.nav a[aria-current="page"],
-.nav a:hover {
-  border-bottom-color: var(--ink);
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 1px;
+  background: var(--ink-strong);
+  transition: right 200ms ease;
+}
+
+.nav a[aria-current="page"]::after,
+.nav a:hover::after {
+  right: 0;
 }
 
 @media (max-width: 40rem) {
@@ -198,7 +279,6 @@ section + section { border-top: 1px solid var(--rule-faint); }
     gap: var(--space-1);
     padding-block: var(--space-1) var(--space-2);
   }
-  .wordmark span { display: none; }
   .nav { gap: var(--space-2); font-size: 0.92rem; }
 }
 
@@ -216,12 +296,14 @@ section + section { border-top: 1px solid var(--rule-faint); }
   color: var(--ink-strong);
   text-decoration: none;
   background: transparent;
-  transition: background-color 160ms ease, color 160ms ease;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
 }
 
 .btn:hover {
   background: var(--ink-strong);
   color: var(--bg);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn--solid {
@@ -230,7 +312,7 @@ section + section { border-top: 1px solid var(--rule-faint); }
 }
 
 .btn--solid:hover {
-  background: var(--ink);
+  background: var(--navy);
 }
 
 /* ==========================================================================
@@ -238,26 +320,31 @@ section + section { border-top: 1px solid var(--rule-faint); }
    ========================================================================== */
 .card {
   border: 1px solid var(--rule);
+  border-left: 4px solid var(--ink-strong);
   padding: var(--space-3);
   background: var(--bg-raised);
   position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
-.card::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 1.4rem;
-  height: 1.4rem;
-  border-top: 2px solid var(--ink-strong);
-  border-left: 2px solid var(--ink-strong);
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
 .card-grid {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
   gap: var(--space-3);
-  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+}
+
+.card-grid > .card {
+  flex: 1 1 15.5rem;
 }
 
 /* ==========================================================================
@@ -282,6 +369,7 @@ section + section { border-top: 1px solid var(--rule-faint); }
   display: block;
   line-height: 1;
   margin-bottom: 0.35em;
+  font-variant-numeric: tabular-nums;
 }
 
 .stat__label {
@@ -303,10 +391,21 @@ section + section { border-top: 1px solid var(--rule-faint); }
    Pull quote / key finding
    ========================================================================== */
 .key-finding {
-  border-top: 3px solid var(--ink-strong);
+  border-top: 3px solid var(--navy);
   border-bottom: 1px solid var(--rule);
-  padding: var(--space-3) 0;
+  padding: var(--space-3);
   margin: var(--space-4) 0;
+  background: var(--bg-raised);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 46rem) {
+  .key-finding--with-chart {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+  }
 }
 
 .key-finding__label {
@@ -330,6 +429,23 @@ section + section { border-top: 1px solid var(--rule-faint); }
 }
 
 /* ==========================================================================
+   Mini charts (inline SVG, near pull-quotes)
+   ========================================================================== */
+.mini-chart { width: 100%; height: auto; }
+.mini-chart text {
+  font-family: var(--serif);
+  fill: var(--body-text);
+  font-size: 9px;
+}
+.mini-chart .mini-chart__caption {
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--body-text);
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+/* ==========================================================================
    Exhibits (embedded chart images)
    ========================================================================== */
 .exhibit {
@@ -337,6 +453,7 @@ section + section { border-top: 1px solid var(--rule-faint); }
   background: #ffffff;
   padding: var(--space-2);
   margin-block: var(--space-3);
+  box-shadow: var(--shadow-sm);
 }
 
 .exhibit img { width: 100%; height: auto; }
@@ -348,6 +465,20 @@ section + section { border-top: 1px solid var(--rule-faint); }
   padding-top: var(--space-1);
   border-top: 1px solid var(--rule-faint);
   margin-top: var(--space-1);
+}
+
+/* ==========================================================================
+   Epigraph / pull-quote
+   ========================================================================== */
+.epigraph {
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--ink);
+  max-width: 30rem;
+  padding-block: var(--space-2);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin: var(--space-3) 0;
 }
 
 /* ==========================================================================
@@ -400,7 +531,8 @@ section + section { border-top: 1px solid var(--rule-faint); }
    Footer
    ========================================================================== */
 .site-footer {
-  border-top: 1px solid var(--rule);
+  background: var(--navy);
+  color: #d9e6ee;
   padding-block: var(--space-3);
   font-size: 0.95rem;
 }
@@ -411,6 +543,9 @@ section + section { border-top: 1px solid var(--rule-faint); }
   flex-wrap: wrap;
   gap: var(--space-2);
 }
+
+.site-footer a { color: #d9e6ee; text-decoration-color: rgba(217, 230, 238, 0.5); }
+.site-footer a:hover { text-decoration-color: #ffffff; color: #ffffff; }
 
 .footer-links {
   display: flex;
@@ -438,9 +573,116 @@ section + section { border-top: 1px solid var(--rule-faint); }
 .piece-list .piece-meta { font-style: italic; font-size: 0.92rem; color: var(--body-text); white-space: nowrap; }
 
 /* ==========================================================================
+   Contact form
+   ========================================================================== */
+.contact-form {
+  border: 1px solid var(--rule);
+  background: var(--bg-raised);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-4);
+  max-width: 34rem;
+}
+
+.form-field {
+  margin-bottom: var(--space-3);
+}
+
+.form-field label {
+  display: block;
+  color: var(--ink);
+  font-weight: 700;
+  margin-bottom: 0.4em;
+  font-size: 0.95rem;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: var(--ink-strong);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  padding: 0.65em 0.8em;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(132, 179, 206, 0.35);
+}
+
+.form-field textarea { resize: vertical; min-height: 8rem; }
+
+.contact-form .btn { width: 100%; justify-content: center; margin-top: var(--space-1); }
+
+/* ==========================================================================
    View-transition-specific fade
    ========================================================================== */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 220ms;
+}
+
+/* ==========================================================================
+   Achievement card date line (own line, italic)
+   ========================================================================== */
+.achievement-date {
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--body-text);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Inline case-study callout (e.g. a case competition example nested in a
+   timeline entry)
+   ========================================================================== */
+.case-example {
+  border: 1px solid var(--rule);
+  background: var(--bg-raised);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-2) var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.case-example h4 { color: var(--ink); }
+
+/* ==========================================================================
+   Small line-art icons on "Where to look next" cards
+   ========================================================================== */
+.card__icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: var(--space-2);
+  color: var(--ink-strong);
+}
+
+.card__icon circle,
+.card__icon path,
+.card__icon line,
+.card__icon rect {
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ==========================================================================
+   Contact page corner accent (a quiet chart-axis flourish so the page
+   doesn't sit visually blank)
+   ========================================================================== */
+.corner-accent {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 220px;
+  height: 160px;
+  opacity: 0.16;
+  color: var(--rule);
+  pointer-events: none;
+  z-index: 0;
 }

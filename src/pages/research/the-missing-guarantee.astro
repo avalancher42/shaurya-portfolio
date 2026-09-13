@@ -5,26 +5,40 @@ import Layout from '../../layouts/Layout.astro';
   title="The Missing Guarantee — Shaurya Vijay Sinha"
   description="A proposed AI and Deep-Tech Survival Bridge Guarantee (ADSBG) for India, stress-tested against a Year-1 fiscal exposure model."
 >
-  <article class="section section--tight">
+  <article class="section section--tight reveal">
     <div class="wrap prose">
-      <p class="eyebrow">Credit-guarantee design · NFPRC research</p>
+      <p class="eyebrow">Credit-guarantee design · Originally published on Swarajya</p>
       <h1>The Missing Guarantee</h1>
       <p style="font-size:1.05rem; font-style:italic; color:var(--body-text); margin-top:-0.4em;">
         A credit instrument for India's AI and deep-tech sector, argued against
         Girish Kuber's <em>The Tatas: How a Family Built a Business and a Nation</em>.
       </p>
 
-      <div class="key-finding">
-        <p class="key-finding__label">Key finding, from the accompanying feasibility model</p>
-        <p class="key-finding__figure">Rs 195 Cr Year-1 shortfall</p>
-        <p class="key-finding__context">
-          At base-case assumptions — 200 loans, an average ticket of Rs 15 crore,
-          75% guarantee cover, a 2.5% annual fee, and a 15% default rate — the
-          scheme collects Rs 75 crore in premium against an expected claim payout
-          of Rs 270 crore, net of recovery. The fee alone does not cover Year-1
-          losses; either the fee rises, or the government accepts a subsidised
-          early phase, the way CGSS's champion-sector fee cut already does.
-        </p>
+      <div class="key-finding key-finding--with-chart">
+        <div>
+          <p class="key-finding__label">Key finding, from the accompanying feasibility model</p>
+          <p class="key-finding__figure">Rs 195 Cr Year-1 shortfall</p>
+          <p class="key-finding__context">
+            At base-case assumptions — 200 loans, an average ticket of Rs 15 crore,
+            75% guarantee cover, a 2.5% annual fee, and a 15% default rate — the
+            scheme collects Rs 75 crore in premium against an expected claim payout
+            of Rs 270 crore, net of recovery. The fee alone does not cover Year-1
+            losses; either the fee rises, or the government accepts a subsidised
+            early phase, the way CGSS's champion-sector fee cut already does.
+          </p>
+        </div>
+        <div>
+          <svg class="mini-chart" viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bar chart comparing Year-1 premium income of Rs 75 crore against expected claim payout of Rs 270 crore">
+            <line x1="20" y1="120" x2="200" y2="120" stroke="var(--rule-faint)" stroke-width="1" />
+            <rect x="55" y="92" width="42" height="28" fill="var(--rule)" />
+            <text x="76" y="84" text-anchor="middle">₹75 Cr</text>
+            <text x="76" y="136" text-anchor="middle">Premium</text>
+            <rect x="135" y="20" width="42" height="100" fill="var(--navy)" />
+            <text x="156" y="14" text-anchor="middle">₹270 Cr</text>
+            <text x="156" y="136" text-anchor="middle">Payout</text>
+          </svg>
+          <p class="mini-chart__caption">Year-1 premium income vs. expected claim payout, net of recovery</p>
+        </div>
       </div>
 
       <h2>The parallel</h2>
@@ -104,7 +118,7 @@ import Layout from '../../layouts/Layout.astro';
     </div>
   </article>
 
-  <section class="section--tight">
+  <section class="section--tight reveal">
     <div class="wrap" style="display:flex; gap:var(--space-3); flex-wrap:wrap; align-items:center; justify-content:space-between; border-top:1px solid var(--rule); padding-top:var(--space-3);">
       <p style="margin:0; max-width:32rem;">Download the feasibility model — benchmark data, the Year-1 exposure calculator, a 10-year growth projection, and the funding-gap sourcing, all with linked citations.</p>
       <a class="btn btn--solid" href="/files/ADSBG_Feasibility_Model.xlsx" download>Download the model (.xlsx)</a>

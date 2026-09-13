@@ -2,7 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="Experience — Shaurya Vijay Sinha" description="Work experience, live client projects, achievements, and education for Shaurya Vijay Sinha.">
-  <section class="section section--tight">
+  <section class="section section--tight section-media reveal">
+    <!-- Placeholder: drop a faint, desaturated skyline / architectural image at
+         /public/images/bg-skyline.jpg — opacity (12%) and tint already set. -->
+    <div class="bg-photo" style="background-image:url('/images/bg-skyline.jpg');"></div>
     <div class="wrap">
       <p class="eyebrow">Record</p>
       <h1>Experience</h1>
@@ -10,7 +13,7 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <section class="section section--tight">
+  <section class="section section--tight reveal">
     <div class="wrap">
       <h2>Work experience</h2>
 
@@ -37,6 +40,23 @@ import Layout from '../layouts/Layout.astro';
             <li>Designed an automated spreadsheet-based assessment and ranking model processing results for 400+ participants, integrating IMPORTRANGE, lookup, aggregation, and ranking functions to automate multi-stage scoring.</li>
             <li>Contributed to Cases Over Coffee, a national-level consulting competition, and the Annual Consulting Camp, the club's flagship event; framed competition rounds, managed strategy and editorial operations, and secured INR 40K+ in sponsorships.</li>
           </ul>
+
+          <div class="case-example">
+            <p class="eyebrow" style="margin-bottom:0.3em;">Case example · De Beers × Ashoka University Consulting Competition</p>
+            <h4 style="margin-bottom:0.4em;">Listleri Packaging Transition Strategy</h4>
+            <p style="margin-bottom:0.6em;">
+              The brief: eliminate single-use plastic across all product lines — still
+              water, carbonated drinks, and juice — without eroding market leadership.
+              Our framework phased the transition over three stages: <strong>Compliance</strong>
+              (Month 0–6, fast rollout via proven external suppliers — fibre bottles,
+              aluminium cans, and Tetrapak cartons by product line), <strong>Optimisation</strong>
+              (Month 6–18, reducing supplier dependency and launching a closed-loop deposit
+              return scheme for aluminium), and <strong>Ownership</strong> (Month 18+, an
+              in-house R&amp;D packaging blend and a fully closed-loop system positioned for
+              licensing to other FMCGs).
+            </p>
+            <a href="/files/DeBeers_CaseComp.pdf" target="_blank" rel="noopener noreferrer">Download the full deck (.pdf) →</a>
+          </div>
         </div>
       </div>
 
@@ -53,7 +73,7 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <section class="section section--tight">
+  <section class="section section--tight reveal">
     <div class="wrap">
       <h2>Live projects</h2>
 
@@ -85,43 +105,46 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <section class="section section--tight">
+  <section class="section section--tight reveal">
     <div class="wrap">
       <h2>Achievements &amp; certification</h2>
       <div class="card-grid" style="margin-top: var(--space-3);">
         <div class="card">
-          <h3 style="font-size:1.05rem;">McKinsey Forward Program</h3>
-          <p style="margin-bottom:0;">McKinsey &amp; Company · October – December 2025</p>
+          <h3 style="font-size:1.05rem;"><a href="https://www.credly.com/badges/bb2a8c53-05ea-4194-a528-85f7e720791a/public_url" target="_blank" rel="noopener noreferrer">McKinsey Forward Program</a></h3>
+          <p style="margin-bottom:0.2em;">McKinsey &amp; Company</p>
+          <p class="achievement-date">October – December 2025</p>
         </div>
         <div class="card">
           <h3 style="font-size:1.05rem;">National Finalist</h3>
-          <p style="margin-bottom:0;">National Policy Hackathon, IIM Calcutta &amp; IIFT Kolkata · 2026</p>
+          <p style="margin-bottom:0.2em;">National Policy Hackathon, IIM Calcutta &amp; IIFT Kolkata</p>
+          <p class="achievement-date">2026</p>
         </div>
         <div class="card">
-          <h3 style="font-size:1.05rem;">National Finalist, 5th position</h3>
-          <p style="margin-bottom:0;">Beyond 180, MDI Gurgaon · 2026</p>
-        </div>
-        <div class="card">
-          <h3 style="font-size:1.05rem;">Finalist</h3>
-          <p style="margin-bottom:0;">Maestro, SRCC · 2026</p>
+          <h3 style="font-size:1.05rem;">National Finalist</h3>
+          <p style="margin-bottom:0.2em;">Beyond 180, MDI Gurgaon</p>
+          <p class="achievement-date">2026</p>
         </div>
         <div class="card">
           <h3 style="font-size:1.05rem;">Semifinalist</h3>
-          <p style="margin-bottom:0;">De Beers × Ashoka University Consulting Competition · 2026</p>
+          <p style="margin-bottom:0.2em;">De Beers × Ashoka University Consulting Competition</p>
+          <p class="achievement-date">2026</p>
         </div>
         <div class="card">
           <h3 style="font-size:1.05rem;">2nd Runner-Up, Best Manager</h3>
-          <p style="margin-bottom:0;">Xavrang, St. Xavier University · 2026</p>
+          <p style="margin-bottom:0.2em;">Xavrang, St. Xavier University</p>
+          <p class="achievement-date">2026</p>
         </div>
         <div class="card">
-          <h3 style="font-size:1.05rem;">National Round Qualifier</h3>
-          <p style="margin-bottom:0;">Tata Imagination Challenge · 2025</p>
+          <h3 style="font-size:1.05rem;">Bhattacharya Pursuit of Excellence Award</h3>
+          <p style="margin-bottom:0.2em;">Loyola School, Jamshedpur</p>
+          <p class="achievement-date">2025–26</p>
+          <p style="margin-top:0.6em; margin-bottom:0; font-size:0.92rem;">Awarded for consistent attendance, discipline, and academic performance across the school year, recognising a balance of strong values with steady results.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section section--tight">
+  <section class="section section--tight reveal">
     <div class="wrap">
       <h2>Skills</h2>
       <div class="card-grid" style="margin-top: var(--space-3);">
@@ -131,13 +154,13 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <div class="card">
           <h3 style="font-size:1.05rem;">Technical</h3>
-          <p style="margin-bottom:0;">PowerPoint (Advanced), Canva (Advanced), Excel — IMPORTRANGE, lookup &amp; aggregation functions, Google Sheets (Intermediate), Tally (Basic).</p>
+          <p style="margin-bottom:0;">PowerPoint (Advanced), Canva (Advanced), Excel (Intermediate), Google Sheets (Intermediate), Tally (Basic).</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section section--tight">
+  <section class="section section--tight reveal">
     <div class="wrap">
       <h2>Education</h2>
       <div class="timeline-item">

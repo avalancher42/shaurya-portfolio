@@ -1,78 +1,179 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const swarajya = 'https://swarajyamag.com/author/2460159/shaurya-vijay-sinha';
+const substack = 'https://substack.com/@shauryavijaysinha';
 ---
-<Layout title="Shaurya Vijay Sinha">
-  <section class="section">
+<Layout title="Shaurya Vijay Sinha — Portfolio">
+  <!-- Brief first-visit loader: LOADING revealing letter by letter while a thin
+       line draws itself underneath, then both fade to reveal the page beneath.
+       Respects prefers-reduced-motion via the global media query in global.css. -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__word">
+      <span style="--i:0">L</span><span style="--i:1">O</span><span style="--i:2">A</span><span style="--i:3">D</span><span style="--i:4">I</span><span style="--i:5">N</span><span style="--i:6">G</span>
+    </div>
+    <svg class="loader__svg" viewBox="0 0 240 32" xmlns="http://www.w3.org/2000/svg">
+      <line x1="4" y1="16" x2="236" y2="16" class="loader__line" />
+      <circle cx="4" cy="16" r="3" class="loader__dot" />
+    </svg>
+  </div>
+
+  <section class="section section-media reveal">
+    <!-- Placeholder: drop a desaturated, low-contrast financial-district / NYSE-style
+         image at /public/images/bg-hero-skyline.jpg — sizing, opacity (12%) and the
+         Venice Blue tint overlay are already set, no layout changes needed after. -->
+    <div class="bg-photo" style="background-image:url('/images/bg-hero-skyline.jpg');"></div>
     <div class="wrap">
       <p class="eyebrow">B.Com (Hons), St. Xavier's College, Kolkata · 2025–2028</p>
       <h1>Shaurya Vijay Sinha</h1>
-      <div class="prose" style="font-size:1.15rem; margin-top: var(--space-2);">
+
+      <div class="prose" style="font-size:1.1rem; margin-top: var(--space-2);">
+        <blockquote class="epigraph" style="margin-top:0;">&ldquo;Profit laughs at goodness when the good is profitable.&rdquo;</blockquote>
         <p>
-          I build fiscal exposure models and write policy arguments that stand
-          on them — mostly on credit guarantees, MSME finance, and where
-          India's capital markets still leave good borrowers unfunded. The
-          long-run aim is a seat in boutique investment banking, doing the
-          same kind of work with sharper stakes.
+          I work at the intersection of capital, risk, and policy, building
+          financial models that turn complex public and private-sector
+          problems into decisions grounded in numbers. My work spans fiscal
+          exposure, credit guarantees, operating models, and the gaps in
+          capital markets that can leave otherwise viable businesses without
+          the funding they need.
         </p>
         <p>
-          Alongside that: two years of consulting casework with Xavier's
-          Consulting Club, live Detailed Project Reports for skilling and
-          industrial clients, and published commentary in
-          <em>Swarajya</em> and on Substack.
+          Alongside this, I have two years of consulting experience with
+          Xavier's Consulting Club, hands-on experience working on projects
+          across public-sector industries, and published economic commentary
+          in <a href={swarajya} target="_blank" rel="noopener noreferrer">Swarajya</a> and <a href={substack} target="_blank" rel="noopener noreferrer">Substack</a>.
+        </p>
+        <p>
+          I am now looking to take this analytical foundation into investment
+          banking, particularly M&amp;A and transaction advisory, where capital
+          allocation carries sharper stakes and good analysis can shape the
+          outcome of a deal.
         </p>
       </div>
+
       <div style="display:flex; gap: var(--space-3); flex-wrap:wrap; margin-top: var(--space-3);">
         <a class="btn btn--solid" href="/experience/">View experience</a>
         <a class="btn" href="https://www.linkedin.com/in/shaurya-vijay-sinha/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a class="btn" href="https://substack.com/@shauryavijaysinha" target="_blank" rel="noopener noreferrer">Substack</a>
-        <a class="btn" href="https://swarajyamag.com/author/2460159/shaurya-vijay-sinha" target="_blank" rel="noopener noreferrer">Swarajya</a>
+        <a class="btn" href={substack} target="_blank" rel="noopener noreferrer">Substack</a>
+        <a class="btn" href={swarajya} target="_blank" rel="noopener noreferrer">Swarajya</a>
       </div>
     </div>
   </section>
 
-  <section class="section section--tight">
+  <section class="section section--tight reveal">
     <div class="wrap">
       <div class="stat-strip">
         <div class="stat">
-          <span class="stat__figure">₹15.02L Cr</span>
+          <span class="stat__figure" data-count-to="15.02" data-decimals="2" data-prefix="₹" data-suffix="L Cr">₹0.00L Cr</span>
           <span class="stat__label">unpriced contingent liability gap modelled in CGTMSE's flat-rate pricing through FY30</span>
         </div>
         <div class="stat">
-          <span class="stat__figure">15+</span>
+          <span class="stat__figure" data-count-to="15" data-decimals="0" data-suffix="+">0+</span>
           <span class="stat__label">national and state-level consulting case competitions, at Xavier's Consulting Club</span>
         </div>
         <div class="stat">
-          <span class="stat__figure">2</span>
+          <span class="stat__figure" data-count-to="2" data-decimals="0" data-suffix="">0</span>
           <span class="stat__label">Detailed Project Reports co-authored for skilling and industrial-sector clients</span>
         </div>
         <div class="stat">
-          <span class="stat__figure">₹4 Cr</span>
+          <span class="stat__figure" data-count-to="4" data-decimals="0" data-prefix="₹" data-suffix=" Cr">₹0 Cr</span>
           <span class="stat__label">pilot financial framework designed for a proposed Centre of Excellence</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section reveal">
     <div class="wrap">
       <h2>Where to look next</h2>
       <div class="card-grid" style="margin-top: var(--space-3);">
         <div class="card">
+          <svg class="card__icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9 8h14M9 8l9 16M9 8h5.5a4 4 0 0 1 0 8H9M9 16h11" />
+          </svg>
           <h3>Experience</h3>
           <p>Research at NFPRC, consulting at Xavier's Consulting Club, and two live client engagements — set out role by role.</p>
           <a href="/experience/">Read the record →</a>
         </div>
         <div class="card">
+          <svg class="card__icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="4" y="7" width="24" height="15" rx="1" />
+            <path d="M4 18h24M13 26h6M16 22v4" />
+          </svg>
           <h3>Research</h3>
-          <p>Two fiscal models, written up as case studies: an AI credit guarantee proposal, and a risk-pricing critique of CGTMSE.</p>
+          <p>Three fiscal and policy models, written up as case studies — credit guarantees, risk pricing, and fiscal transfer design.</p>
           <a href="/research/">Open the case studies →</a>
         </div>
         <div class="card">
+          <svg class="card__icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9 4h10l5 5v19a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z" />
+            <path d="M19 4v5h5M11 16h10M11 20h10M11 24h6" />
+          </svg>
           <h3>Writing</h3>
-          <p>Published commentary on growth, industrial policy, and economic history — in Swarajya and on Substack.</p>
+          <p>3 articles published in Swarajya on Indian economic policy.</p>
           <a href="/writing/">Browse the pieces →</a>
         </div>
       </div>
     </div>
   </section>
+
+  <style>
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      animation: loaderFade 1.4s ease forwards;
+    }
+
+    .loader__word {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      letter-spacing: 0.4em;
+      color: var(--ink-strong);
+      margin-bottom: var(--space-2);
+      padding-left: 0.4em; /* balance the tracked letter-spacing */
+    }
+
+    .loader__word span {
+      display: inline-block;
+      opacity: 0;
+      animation: letterIn 220ms ease forwards;
+      animation-delay: calc(var(--i) * 90ms);
+    }
+
+    .loader__svg { width: 220px; max-width: 55vw; overflow: visible; }
+
+    .loader__line {
+      stroke: var(--ink-strong);
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 240;
+      stroke-dashoffset: 240;
+      animation: drawLine 950ms ease forwards;
+      animation-delay: 80ms;
+    }
+
+    .loader__dot {
+      fill: var(--navy);
+      animation: dotMove 950ms ease forwards;
+      animation-delay: 80ms;
+    }
+
+    @keyframes letterIn { to { opacity: 1; } }
+    @keyframes drawLine { to { stroke-dashoffset: 0; } }
+    @keyframes dotMove { to { transform: translateX(232px); } }
+
+    @keyframes loaderFade {
+      0%   { opacity: 1; visibility: visible; }
+      75%  { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+  </style>
 </Layout>

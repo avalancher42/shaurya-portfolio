@@ -5,26 +5,40 @@ import Layout from '../../layouts/Layout.astro';
   title="The Plough and the Guarantee — Shaurya Vijay Sinha"
   description="A Bastiat-and-Kautilya reading of CGTMSE's flat guarantee fee, projecting the fiscal cost of underpriced risk through FY30."
 >
-  <article class="section section--tight">
+  <article class="section section--tight reveal">
     <div class="wrap prose">
-      <p class="eyebrow">Risk pricing · NFPRC research</p>
+      <p class="eyebrow">Risk pricing · Originally published on Swarajya</p>
       <h1>The Plough and the Guarantee</h1>
       <p style="font-size:1.05rem; font-style:italic; color:var(--body-text); margin-top:-0.4em;">
         What CGTMSE's near-uniform guarantee fee costs, read through Frédéric
         Bastiat's <em>Essays on Political Economy</em> and Kautilya's <em>Arthashastra</em>.
       </p>
 
-      <div class="key-finding">
-        <p class="key-finding__label">Key finding, from the accompanying projection model</p>
-        <p class="key-finding__figure">Rs 15.02 lakh crore unpriced gap by FY30</p>
-        <p class="key-finding__context">
-          Projected forward from a Rs 9 lakh crore FY25 base, flat-rate pricing
-          (35% historical CAGR) reaches Rs 40.36 lakh crore in cumulative
-          exposure by FY30, against Rs 25.34 lakh crore under a risk-tiered
-          alternative (23% CAGR). The gap between them — Rs 15.02 lakh crore —
-          is 37% of total flat-rate exposure: guarantee risk the fee structure
-          never actually prices.
-        </p>
+      <div class="key-finding key-finding--with-chart">
+        <div>
+          <p class="key-finding__label">Key finding, from the accompanying projection model</p>
+          <p class="key-finding__figure">Rs 15.02 lakh crore unpriced gap by FY30</p>
+          <p class="key-finding__context">
+            Projected forward from a Rs 9 lakh crore FY25 base, flat-rate pricing
+            (35% historical CAGR) reaches Rs 40.36 lakh crore in cumulative
+            exposure by FY30, against Rs 25.34 lakh crore under a risk-tiered
+            alternative (23% CAGR). The gap between them — Rs 15.02 lakh crore —
+            is 37% of total flat-rate exposure: guarantee risk the fee structure
+            never actually prices.
+          </p>
+        </div>
+        <div>
+          <svg class="mini-chart" viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Line chart comparing CGTMSE's projected cumulative guarantee exposure under flat-rate versus risk-tiered pricing from FY25 to FY30">
+            <line x1="20" y1="120" x2="200" y2="120" stroke="var(--rule-faint)" stroke-width="1" />
+            <polyline points="20,100 56,93 92,83.6 128,70.8 164,53.6 200,30.3" fill="none" stroke="var(--navy)" stroke-width="2" />
+            <polyline points="20,100 56,95.4 92,89.7 128,82.8 164,74.2 200,63.7" fill="none" stroke="var(--rule)" stroke-width="2" />
+            <text x="20" y="132" text-anchor="middle">FY25</text>
+            <text x="200" y="132" text-anchor="middle">FY30</text>
+            <circle cx="24" cy="10" r="3" fill="var(--navy)" /><text x="32" y="13">Flat-rate</text>
+            <circle cx="104" cy="10" r="3" fill="var(--rule)" /><text x="112" y="13">Risk-tiered</text>
+          </svg>
+          <p class="mini-chart__caption">Cumulative guarantee exposure, FY25–FY30 (Rs lakh crore)</p>
+        </div>
       </div>
 
       <h2>One plough, two farmers</h2>
@@ -119,7 +133,7 @@ import Layout from '../../layouts/Layout.astro';
     </div>
   </article>
 
-  <section class="section--tight">
+  <section class="section--tight reveal">
     <div class="wrap" style="display:flex; gap:var(--space-3); flex-wrap:wrap; align-items:center; justify-content:space-between; border-top:1px solid var(--rule); padding-top:var(--space-3);">
       <p style="margin:0; max-width:32rem;">Download the projection model — assumptions, sourcing notes, and the full FY25–FY30 table behind the chart above.</p>
       <a class="btn btn--solid" href="/files/CGTMSE_Projection_Model.xlsx" download>Download the model (.xlsx)</a>
