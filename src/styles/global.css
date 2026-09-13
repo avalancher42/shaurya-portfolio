@@ -71,7 +71,7 @@ body::before {
   background-image:
     repeating-linear-gradient(to right, rgba(132, 179, 206, 0.35) 0 1px, transparent 1px 96px),
     repeating-linear-gradient(to bottom, rgba(132, 179, 206, 0.35) 0 1px, transparent 1px 96px);
-  opacity: 0.05;
+  opacity: 0.065;
 }
 
 .masthead, main, .site-footer { position: relative; z-index: 1; }
@@ -176,34 +176,63 @@ section + section { border-top: 1px solid var(--rule-faint); }
 }
 
 /* ==========================================================================
-   Section background photography (placeholders)
-   Drop a real image at the referenced path later — opacity, sizing and the
-   tint overlay are already tuned so no further layout work is needed.
+   Ghosted background figure (large, low-opacity key stat behind a
+   case-study article — real content used as texture, not decoration)
    ========================================================================== */
-.section-media {
+.ghost-figure-host {
   position: relative;
   overflow: hidden;
 }
 
-.bg-photo {
+.ghost-figure {
   position: absolute;
-  inset: 0;
+  top: 50%;
+  right: -1rem;
+  transform: translateY(-50%);
   z-index: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.12;
-  mix-blend-mode: luminosity;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(5rem, 16vw, 13rem);
+  color: var(--ink);
+  opacity: 0.055;
+  white-space: nowrap;
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+}
+
+.ghost-figure-host > .wrap { position: relative; z-index: 1; }
+
+/* ==========================================================================
+   Blurred abstract "finance" motif — original SVG shapes, softened with a
+   CSS blur, used to break up large blank areas without competing with text.
+   ========================================================================== */
+.finance-blur-host {
+  position: relative;
+  overflow: hidden;
+}
+
+.finance-blur {
+  position: absolute;
+  z-index: 0;
+  filter: blur(46px);
+  opacity: 0.16;
   pointer-events: none;
 }
 
-.bg-photo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0, 51, 102, 0.35) 0%, rgba(245, 238, 221, 0.92) 78%);
+.finance-blur-host > .wrap { position: relative; z-index: 1; }
+
+/* ==========================================================================
+   Timeline rail — a thin connecting line down the left margin of a run of
+   timeline-items
+   ========================================================================== */
+.timeline {
+  position: relative;
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--rule-soft);
 }
 
-.section-media > .wrap { position: relative; z-index: 1; }
+.timeline .timeline-item:first-child { padding-top: 0; }
 
 /* ==========================================================================
    Masthead / nav
@@ -337,14 +366,10 @@ section + section { border-top: 1px solid var(--rule-faint); }
 }
 
 .card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  grid-auto-rows: 1fr;
   gap: var(--space-3);
-}
-
-.card-grid > .card {
-  flex: 1 1 15.5rem;
 }
 
 /* ==========================================================================
@@ -573,52 +598,6 @@ section + section { border-top: 1px solid var(--rule-faint); }
 .piece-list .piece-meta { font-style: italic; font-size: 0.92rem; color: var(--body-text); white-space: nowrap; }
 
 /* ==========================================================================
-   Contact form
-   ========================================================================== */
-.contact-form {
-  border: 1px solid var(--rule);
-  background: var(--bg-raised);
-  box-shadow: var(--shadow-sm);
-  padding: var(--space-4);
-  max-width: 34rem;
-}
-
-.form-field {
-  margin-bottom: var(--space-3);
-}
-
-.form-field label {
-  display: block;
-  color: var(--ink);
-  font-weight: 700;
-  margin-bottom: 0.4em;
-  font-size: 0.95rem;
-}
-
-.form-field input,
-.form-field textarea {
-  width: 100%;
-  font-family: var(--serif);
-  font-size: 1rem;
-  color: var(--ink-strong);
-  background: var(--bg);
-  border: 1px solid var(--rule);
-  padding: 0.65em 0.8em;
-  transition: border-color 160ms ease, box-shadow 160ms ease;
-}
-
-.form-field input:focus,
-.form-field textarea:focus {
-  outline: none;
-  border-color: var(--ink);
-  box-shadow: 0 0 0 3px rgba(132, 179, 206, 0.35);
-}
-
-.form-field textarea { resize: vertical; min-height: 8rem; }
-
-.contact-form .btn { width: 100%; justify-content: center; margin-top: var(--space-1); }
-
-/* ==========================================================================
    View-transition-specific fade
    ========================================================================== */
 ::view-transition-old(root),
@@ -627,13 +606,54 @@ section + section { border-top: 1px solid var(--rule-faint); }
 }
 
 /* ==========================================================================
-   Achievement card date line (own line, italic)
+   Achievements — dated list (no cards)
    ========================================================================== */
-.achievement-date {
+.honours-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.honours-list li {
+  padding: var(--space-2) 0 var(--space-2) var(--space-2);
+  border-top: 1px solid var(--rule-faint);
+  position: relative;
+}
+
+.honours-list li:last-child { border-bottom: 1px solid var(--rule-faint); }
+
+.honours-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.55em;
+  width: 8px;
+  height: 8px;
+  background: var(--rule);
+}
+
+.honours-list .honour-title {
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 0.15em;
+}
+
+.honours-list .honour-title a { color: var(--ink); }
+
+.honours-list .honour-org {
+  margin: 0 0 0.15em;
+}
+
+.honours-list .honour-date {
   font-style: italic;
   font-size: 0.88rem;
   color: var(--body-text);
   margin: 0;
+}
+
+.honours-list .honour-note {
+  margin: 0.5em 0 0;
+  font-size: 0.92rem;
 }
 
 /* ==========================================================================
@@ -672,17 +692,8 @@ section + section { border-top: 1px solid var(--rule-faint); }
 }
 
 /* ==========================================================================
-   Contact page corner accent (a quiet chart-axis flourish so the page
-   doesn't sit visually blank)
+   Contact cards
    ========================================================================== */
-.corner-accent {
-  position: absolute;
-  bottom: -10px;
-  right: -10px;
-  width: 220px;
-  height: 160px;
-  opacity: 0.16;
-  color: var(--rule);
-  pointer-events: none;
-  z-index: 0;
+.contact-cards {
+  max-width: 40rem;
 }

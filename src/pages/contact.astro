@@ -1,48 +1,30 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="Contact — Shaurya Vijay Sinha" description="Get in touch with Shaurya Vijay Sinha by email or LinkedIn.">
-  <section class="section reveal" style="position:relative; overflow:hidden;">
-    <svg class="corner-accent" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <line x1="10" y1="150" x2="210" y2="150" stroke="currentColor" stroke-width="1.4" fill="none" />
-      <line x1="10" y1="150" x2="10" y2="10" stroke="currentColor" stroke-width="1.4" fill="none" />
-      <polyline points="10,120 55,95 95,110 140,55 185,70 210,30" stroke="currentColor" stroke-width="1.4" fill="none" />
-    </svg>
+<Layout title="Contact — Shaurya Vijay Sinha" description="Get in touch with Shaurya Vijay Sinha by email, LinkedIn, or Substack.">
+  <section class="section reveal">
     <div class="wrap">
       <p class="eyebrow">Get in touch</p>
       <h1>Let's talk</h1>
       <p class="prose" style="font-size:1.1rem;">
         Happy to talk about the research, the models behind it, or roles in
-        finance and investment banking. Send a note and I'll get back to you
-        by email.
+        finance and investment banking.
       </p>
 
-      <form
-        class="contact-form"
-        action="mailto:shauryavijaysinha@gmail.com"
-        method="POST"
-        enctype="text/plain"
-        style="margin-top: var(--space-4);"
-      >
-        <div class="form-field">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="Name" required />
+      <div class="card-grid contact-cards" style="margin-top: var(--space-4);">
+        <div class="card">
+          <h3 style="font-size:1.05rem;">Email</h3>
+          <p style="margin-bottom:0;"><a href="mailto:shauryavijaysinha@gmail.com">shauryavijaysinha@gmail.com</a></p>
         </div>
-        <div class="form-field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="Email" required />
+        <div class="card">
+          <h3 style="font-size:1.05rem;">LinkedIn</h3>
+          <p style="margin-bottom:0;"><a href="https://www.linkedin.com/in/shaurya-vijay-sinha/" target="_blank" rel="noopener noreferrer">/in/shaurya-vijay-sinha</a></p>
         </div>
-        <div class="form-field">
-          <label for="message">Message</label>
-          <textarea id="message" name="Message" required></textarea>
+        <div class="card">
+          <h3 style="font-size:1.05rem;">Substack</h3>
+          <p style="margin-bottom:0;"><a href="https://substack.com/@shauryavijaysinha" target="_blank" rel="noopener noreferrer">@shauryavijaysinha</a></p>
         </div>
-        <button type="submit" class="btn btn--solid">Send message</button>
-      </form>
-
-      <p class="prose" style="margin-top: var(--space-3); font-size:0.95rem;">
-        Prefer to write directly? <a href="mailto:shauryavijaysinha@gmail.com">shauryavijaysinha@gmail.com</a>
-        · <a href="https://www.linkedin.com/in/shaurya-vijay-sinha/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      </p>
+      </div>
     </div>
   </section>
 </Layout>

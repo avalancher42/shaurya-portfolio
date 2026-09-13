@@ -7,7 +7,9 @@ const substack = 'https://substack.com/@shauryavijaysinha';
 <Layout title="Shaurya Vijay Sinha — Portfolio">
   <!-- Brief first-visit loader: LOADING revealing letter by letter while a thin
        line draws itself underneath, then both fade to reveal the page beneath.
-       Respects prefers-reduced-motion via the global media query in global.css. -->
+       Skipped entirely (via inline head script + sessionStorage, see Layout.astro)
+       on every navigation after the first this session. Respects
+       prefers-reduced-motion via the global media query in global.css. -->
   <div class="loader" aria-hidden="true">
     <div class="loader__word">
       <span style="--i:0">L</span><span style="--i:1">O</span><span style="--i:2">A</span><span style="--i:3">D</span><span style="--i:4">I</span><span style="--i:5">N</span><span style="--i:6">G</span>
@@ -18,11 +20,17 @@ const substack = 'https://substack.com/@shauryavijaysinha';
     </svg>
   </div>
 
-  <section class="section section-media reveal">
-    <!-- Placeholder: drop a desaturated, low-contrast financial-district / NYSE-style
-         image at /public/images/bg-hero-skyline.jpg — sizing, opacity (12%) and the
-         Venice Blue tint overlay are already set, no layout changes needed after. -->
-    <div class="bg-photo" style="background-image:url('/images/bg-hero-skyline.jpg');"></div>
+  <section class="section finance-blur-host reveal">
+    <!-- Original, blurred abstract "growth chart" motif — drawn shapes, not a
+         photo — softening a blank stretch behind the hero text. -->
+    <svg class="finance-blur" viewBox="0 0 400 260" width="480" height="320" style="top:-40px; right:-60px;" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="40" y="150" width="28" height="90" fill="var(--rule)" />
+      <rect x="90" y="110" width="28" height="130" fill="var(--ink)" />
+      <rect x="140" y="70" width="28" height="170" fill="var(--rule)" />
+      <rect x="190" y="130" width="28" height="110" fill="var(--navy)" />
+      <rect x="240" y="40" width="28" height="200" fill="var(--ink)" />
+      <polyline points="40,150 104,110 154,70 204,130 254,40" stroke="var(--navy)" stroke-width="5" fill="none" />
+    </svg>
     <div class="wrap">
       <p class="eyebrow">B.Com (Hons), St. Xavier's College, Kolkata · 2025–2028</p>
       <h1>Shaurya Vijay Sinha</h1>
@@ -62,22 +70,26 @@ const substack = 'https://substack.com/@shauryavijaysinha';
 
   <section class="section section--tight reveal">
     <div class="wrap">
+      <!-- Each figure's real, final text is rendered here by default — the
+           count-up in Layout.astro's script is a purely visual overlay that
+           briefly re-renders from 0, and never affects what's in the markup
+           for no-JS clients, crawlers, or link-preview bots. -->
       <div class="stat-strip">
         <div class="stat">
-          <span class="stat__figure" data-count-to="15.02" data-decimals="2" data-prefix="₹" data-suffix="L Cr">₹0.00L Cr</span>
+          <span class="stat__figure" data-count-to="15.02" data-decimals="2" data-prefix="₹" data-suffix="L Cr">₹15.02L Cr</span>
           <span class="stat__label">unpriced contingent liability gap modelled in CGTMSE's flat-rate pricing through FY30</span>
         </div>
         <div class="stat">
-          <span class="stat__figure" data-count-to="15" data-decimals="0" data-suffix="+">0+</span>
+          <span class="stat__figure" data-count-to="15" data-decimals="0" data-suffix="+">15+</span>
           <span class="stat__label">national and state-level consulting case competitions, at Xavier's Consulting Club</span>
         </div>
         <div class="stat">
-          <span class="stat__figure" data-count-to="2" data-decimals="0" data-suffix="">0</span>
+          <span class="stat__figure" data-count-to="2" data-decimals="0" data-suffix="">2</span>
           <span class="stat__label">Detailed Project Reports co-authored for skilling and industrial-sector clients</span>
         </div>
         <div class="stat">
-          <span class="stat__figure" data-count-to="4" data-decimals="0" data-prefix="₹" data-suffix=" Cr">₹0 Cr</span>
-          <span class="stat__label">pilot financial framework designed for a proposed Centre of Excellence</span>
+          <span class="stat__figure" data-count-to="24" data-decimals="0" data-suffix="%">24%</span>
+          <span class="stat__label">projected revenue CAGR modelled in the Centre of Excellence's 5-year operating model (₹79L → ₹2.30 Cr)</span>
         </div>
       </div>
     </div>
@@ -131,6 +143,14 @@ const substack = 'https://substack.com/@shauryavijaysinha';
       animation: loaderFade 1.4s ease forwards;
     }
 
+    /* Skip entirely (no flash, no replay) once this session has already
+       shown it once — see the inline head script in Layout.astro. */
+    :global(html[data-skip-loader]) .loader {
+      animation: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+
     .loader__word {
       font-family: var(--serif);
       font-weight: 700;
@@ -138,7 +158,7 @@ const substack = 'https://substack.com/@shauryavijaysinha';
       letter-spacing: 0.4em;
       color: var(--ink-strong);
       margin-bottom: var(--space-2);
-      padding-left: 0.4em; /* balance the tracked letter-spacing */
+      padding-left: 0.4em;
     }
 
     .loader__word span {

@@ -31,6 +31,18 @@ const currentPath = Astro.url.pathname;
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f5eedd" />
+    <script is:inline>
+      // Loading screen should only ever play once per browser session,
+      // regardless of how many times Home is revisited. This runs
+      // synchronously before paint so there's no flash.
+      try {
+        if (sessionStorage.getItem('svs-loader-shown')) {
+          document.documentElement.setAttribute('data-skip-loader', '');
+        } else {
+          sessionStorage.setItem('svs-loader-shown', '1');
+        }
+      } catch (e) {}
+    </script>
     <ClientRouter />
   </head>
   <body>
@@ -63,7 +75,7 @@ const currentPath = Astro.url.pathname;
           <a href="https://www.linkedin.com/in/shaurya-vijay-sinha/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href="https://substack.com/@shauryavijaysinha" target="_blank" rel="noopener noreferrer">Substack</a>
           <a href="https://swarajyamag.com/author/2460159/shaurya-vijay-sinha" target="_blank" rel="noopener noreferrer">Swarajya</a>
-          <a href="mailto:shauryavijaysinha@gmail.com">Email</a>
+          <a href="mailto:shauryavijaysinha@gmail.com">shauryavijaysinha@gmail.com</a>
         </div>
       </div>
     </footer>
