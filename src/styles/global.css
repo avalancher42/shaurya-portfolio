@@ -2,8 +2,8 @@
    Design tokens
    ========================================================================== */
 :root {
-  --bg: #f5eedd;
-  --bg-raised: #faf6ec;
+  --bg: #fffdf6;
+  --bg-raised: #ffffff;
   --ink: #16587b;
   --ink-strong: #0d3d57;
   --navy: #003366;
@@ -596,6 +596,41 @@ section + section { border-top: 1px solid var(--rule-faint); }
 
 .piece-list .piece-title { font-weight: 700; color: var(--ink); }
 .piece-list .piece-meta { font-style: italic; font-size: 0.92rem; color: var(--body-text); white-space: nowrap; }
+
+/* ==========================================================================
+   Hero (side-by-side text + portrait)
+   ========================================================================== */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.hero-portrait img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 3px solid var(--rule);
+}
+
+.hero-portrait__caption {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--body-text);
+  margin: 0.7em 0 0;
+  text-align: center;
+}
+
+@media (max-width: 48rem) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-portrait {
+    max-width: 20rem;
+    margin-inline: auto;
+  }
+}
 
 /* ==========================================================================
    View-transition-specific fade
