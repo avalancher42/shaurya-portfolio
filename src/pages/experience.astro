@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import TransitMap from '../components/TransitMap.astro';
 ---
 <Layout title="Experience — Shaurya Vijay Sinha" description="Work experience, live client projects, achievements, and education for Shaurya Vijay Sinha.">
-  <section class="section section--tight reveal">
+  <section class="section section--tight page-top reveal">
     <div class="wrap">
       <p class="eyebrow">Record</p>
       <h1>Experience</h1>
@@ -92,39 +93,12 @@ import Layout from '../layouts/Layout.astro';
   <section class="section section--tight reveal">
     <div class="wrap">
       <h2>Achievements &amp; certification</h2>
-      <ul class="honours-list" style="margin-top: var(--space-3);">
-        <li>
-          <p class="honour-title"><a href="https://www.credly.com/badges/bb2a8c53-05ea-4194-a528-85f7e720791a/public_url" target="_blank" rel="noopener noreferrer">McKinsey Forward Program</a></p>
-          <p class="honour-org">McKinsey &amp; Company</p>
-          <p class="honour-date">October – December 2025</p>
-        </li>
-        <li>
-          <p class="honour-title">National Finalist</p>
-          <p class="honour-org">National Policy Hackathon, IIM Calcutta &amp; IIFT Kolkata</p>
-          <p class="honour-date">2026</p>
-        </li>
-        <li>
-          <p class="honour-title">National Finalist</p>
-          <p class="honour-org">Beyond 180, MDI Gurgaon</p>
-          <p class="honour-date">2026</p>
-        </li>
-        <li>
-          <p class="honour-title">Semifinalist</p>
-          <p class="honour-org">De Beers × Ashoka University Consulting Competition</p>
-          <p class="honour-date">2026</p>
-        </li>
-        <li>
-          <p class="honour-title">2nd Runner-Up, Best Manager</p>
-          <p class="honour-org">Xavrang, St. Xavier University</p>
-          <p class="honour-date">2026</p>
-        </li>
-        <li>
-          <p class="honour-title">Bhattacharya Pursuit of Excellence Award</p>
-          <p class="honour-org">Loyola School, Jamshedpur</p>
-          <p class="honour-date">2025–26</p>
-          <p class="honour-note">Awarded for consistent attendance, discipline, and academic performance across the school year, recognising a balance of strong values with steady results.</p>
-        </li>
-      </ul>
+      <TransitMap />
+      <p class="transit-note">
+        <strong>Bhattacharya Pursuit of Excellence Award</strong> (Loyola School, Jamshedpur, 2025–26):
+        awarded for consistent attendance, discipline, and academic performance across the school year,
+        recognising a balance of strong values with steady results.
+      </p>
     </div>
   </section>
 

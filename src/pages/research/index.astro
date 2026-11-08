@@ -1,9 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { researchPieces } from '../../data/research';
+import { showPaintings } from '../../data/site';
 ---
 <Layout title="Research — Shaurya Vijay Sinha" description="Independent fiscal and policy case studies: an AI credit-guarantee proposal (ADSBG), a risk-pricing critique of CGTMSE, and a fiscal transfer framework.">
-  <section class="section section--tight finance-blur-host reveal">
+  <section class="section section--tight finance-blur-host page-top reveal">
     <!-- Original, blurred abstract candlestick motif — drawn shapes, not a photo. -->
     <svg class="finance-blur" viewBox="0 0 360 220" width="420" height="260" style="top:-20px; right:-50px;" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <line x1="60" y1="30" x2="60" y2="190" stroke="var(--rule)" stroke-width="4" />
@@ -30,7 +31,8 @@ import { researchPieces } from '../../data/research';
     <div class="wrap">
       <div class="card-grid">
         {researchPieces.map((piece) => (
-          <div class="card">
+          <div class="card card--image">
+            {showPaintings && <div class="card__bg" style={`background-image:url('${piece.image}')`} aria-hidden="true"></div>}
             <p class="eyebrow" style="margin-bottom:0.3em;">{piece.tag}</p>
             <h3>{piece.title}</h3>
             <p>{piece.description}</p>

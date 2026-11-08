@@ -1,15 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { caseCompetitions } from '../data/case-competitions';
+import { showPaintings } from '../data/site';
 ---
 <Layout
   title="Case Competitions — Shaurya Vijay Sinha"
   description="Case competition work: De Beers × Ashoka University Consulting Challenge, IIMB's National Student Case Competition, and SRCC's Maestro."
 >
-  <section class="section section--tight reveal">
+  <section class="section section--tight page-top reveal">
     <div class="wrap">
       <p class="eyebrow">Competitive casework</p>
-      <h1>Case Competitions</h1>
+      <h1>Case <span class="hl">Competitions</span></h1>
       <p class="prose">
         Independent case competition entries — each with a short brief and a
         download link to the full deck.
@@ -19,13 +20,23 @@ import { caseCompetitions } from '../data/case-competitions';
 
   <section class="section section--tight reveal">
     <div class="wrap">
-      <div class="card-grid">
+      <div class="card-grid card-grid--two">
         {caseCompetitions.map((entry) => (
-          <div class="card">
-            <p class="eyebrow" style="margin-bottom:0.3em;">{entry.eyebrow}</p>
-            <h3>{entry.title}</h3>
-            <p>{entry.description}</p>
-            <a href={entry.fileHref} target="_blank" rel="noopener noreferrer">Download the deck (.pdf) →</a>
+          <div class={`card card--image${entry.rounds.length > 1 ? ' card--wide' : ''}`}>
+            {showPaintings && entry.image && <div class="card__bg" style={`background-image:url('${entry.image}')`} aria-hidden="true"></div>}
+            <p class="eyebrow" style="margin-bottom:0.6em;">
+              {entry.competition}{entry.track ? ` · ${entry.track}` : ''}
+            </p>
+            <div class={entry.rounds.length > 1 ? 'card-rounds' : undefined}>
+              {entry.rounds.map((round) => (
+                <div class="card-round">
+                  {round.label && <p class="card-round__label">{round.label}</p>}
+                  <h3>{round.title}</h3>
+                  <p>{round.description}</p>
+                  <a href={round.fileHref} target="_blank" rel="noopener noreferrer">Download the deck (.pdf) →</a>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>

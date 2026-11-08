@@ -4,6 +4,7 @@ export interface ResearchPiece {
   title: string;
   description: string;
   keyFinding: string;
+  image: string;
 }
 
 // Add a new entry here, and a matching page at src/pages/research/<slug>.astro,
@@ -16,6 +17,7 @@ export const researchPieces: ResearchPiece[] = [
     description:
       "A proposed AI and Deep-Tech Survival Bridge Guarantee (ADSBG), argued through the Tatas' 1907 financing gap and stress-tested against a Year-1 fee-to-payout shortfall.",
     keyFinding: 'Key finding: Rs 195 Cr Year-1 shortfall',
+    image: '/images/foundry-adsbg.jpg',
   },
   {
     slug: 'the-plough-and-the-guarantee',
@@ -24,6 +26,7 @@ export const researchPieces: ResearchPiece[] = [
     description:
       "A Bastiat-and-Kautilya reading of CGTMSE's flat guarantee fee, quantifying what uniform pricing costs against a risk-tiered alternative through FY30.",
     keyFinding: 'Key finding: Rs 15.02 lakh crore unpriced gap',
+    image: '/images/ledger-cgtmse.jpg',
   },
   {
     slug: 'outcome-linked-transfer-framework',
@@ -32,5 +35,6 @@ export const researchPieces: ResearchPiece[] = [
     description:
       "A pitch for restructuring India's intergovernmental transfers around measurable outcomes rather than input spending, built for the National Policy Hackathon at IIM Calcutta and IIFT Kolkata.",
     keyFinding: 'National Finalist — IIM Calcutta × IIFT Kolkata',
+    image: '/images/delta-hackathon.jpg',
   },
 ];

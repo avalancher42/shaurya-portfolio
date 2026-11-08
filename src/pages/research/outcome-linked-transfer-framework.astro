@@ -1,15 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import BlueprintTransfers from '../../components/BlueprintTransfers.astro';
+import { showPaintings } from '../../data/site';
 ---
 <Layout
   title="The Outcome-Linked Transfer Framework — Shaurya Vijay Sinha"
   description="A pitch for restructuring India's intergovernmental transfers around measurable outcomes, built for the National Policy Hackathon at IIM Calcutta and IIFT Kolkata."
 >
-  <article class="section section--tight ghost-figure-host reveal">
+  <article class="section section--tight ghost-figure-host page-top page-top--article reveal">
+    {showPaintings && <div class="page-banner" style="background-image:url('/images/delta-hackathon.jpg')" aria-hidden="true"></div>}
     <span class="ghost-figure" aria-hidden="true">41%</span>
     <div class="wrap prose">
       <p class="eyebrow">Fiscal federalism · National Policy Hackathon</p>
-      <h1>The Outcome-Linked Transfer Framework</h1>
+      <h1>The <span class="hl">Outcome-Linked</span> Transfer Framework</h1>
       <p style="font-size:1.05rem; font-style:italic; color:var(--body-text); margin-top:-0.4em;">
         A pitch deck built for the National Policy Hackathon hosted by IIM
         Calcutta and IIFT Kolkata, on fiscal policy and multi-level governance.
@@ -17,12 +20,14 @@ import Layout from '../../layouts/Layout.astro';
 
       <div class="key-finding">
         <p class="key-finding__label">Result</p>
-        <p class="key-finding__figure">National Finalist</p>
+        <p class="key-finding__figure">National <span class="hl">Finalist</span></p>
         <p class="key-finding__context">
           Competed in the finals against teams from MBA and PhD programmes,
           presenting as Team Equi-Nomics.
         </p>
       </div>
+
+      <BlueprintTransfers />
 
       <h2>The problem</h2>
       <p>

@@ -1,15 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import BlueprintGuarantee from '../../components/BlueprintGuarantee.astro';
+import { showPaintings } from '../../data/site';
 ---
 <Layout
   title="The Missing Guarantee — Shaurya Vijay Sinha"
   description="A proposed AI and Deep-Tech Survival Bridge Guarantee (ADSBG) for India, stress-tested against a Year-1 fiscal exposure model."
 >
-  <article class="section section--tight ghost-figure-host reveal">
+  <article class="section section--tight ghost-figure-host page-top page-top--article reveal">
+    {showPaintings && <div class="page-banner" style="background-image:url('/images/foundry-adsbg.jpg')" aria-hidden="true"></div>}
     <span class="ghost-figure" aria-hidden="true">195 Cr</span>
     <div class="wrap prose">
       <p class="eyebrow">Credit-guarantee design · An independent analysis following Girish Kuber's <em>The Tatas</em></p>
-      <h1>The Missing Guarantee</h1>
+      <h1>The <span class="hl">Missing</span> Guarantee</h1>
       <p style="font-size:1.05rem; font-style:italic; color:var(--body-text); margin-top:-0.4em;">
         A credit instrument for India's AI and deep-tech sector, argued against
         Girish Kuber's <em>The Tatas: How a Family Built a Business and a Nation</em>.
@@ -18,7 +21,7 @@ import Layout from '../../layouts/Layout.astro';
       <div class="key-finding key-finding--with-chart">
         <div>
           <p class="key-finding__label">Key finding, from the accompanying feasibility model</p>
-          <p class="key-finding__figure">Rs 195 Cr Year-1 shortfall</p>
+          <p class="key-finding__figure"><span class="hl">Rs 195 Cr</span> Year-1 shortfall</p>
           <p class="key-finding__context">
             At base-case assumptions — 200 loans, an average ticket of Rs 15 crore,
             75% guarantee cover, a 2.5% annual fee, and a 15% default rate — the
@@ -41,6 +44,8 @@ import Layout from '../../layouts/Layout.astro';
           <p class="mini-chart__caption">Year-1 premium income vs. expected claim payout, net of recovery</p>
         </div>
       </div>
+
+      <BlueprintGuarantee />
 
       <h2>The parallel</h2>
       <p>

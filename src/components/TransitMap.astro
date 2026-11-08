@@ -1,0 +1,76 @@
+---
+import { achievementLines } from '../data/achievements';
+
+const rowY = [110, 275, 440];      // one horizontal line per group
+const stationX = [260, 560];       // first and second station along each line
+const endX = 730;
+const W = 790;
+const H = 580;
+---
+<div class="transit-scroll">
+  <svg
+    class="transit-map"
+    viewBox={`0 0 ${W} ${H}`}
+    role="img"
+    aria-label="Transit-style map of achievements: three lines, red for national finals, yellow for semifinals and podium places, green for credentials and awards."
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {achievementLines.map((line, li) => {
+      const y = rowY[li];
+      return (
+        <g>
+          {/* the line itself: a 45 degree bend in, then straight */}
+          <path
+            d={`M 46 ${y + 52} L 98 ${y} L ${endX} ${y}`}
+            fill="none"
+            stroke={line.colour}
+            stroke-width="14"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          {/* line roundel and name */}
+          <circle cx="46" cy={y + 52} r="13" fill={line.colour} stroke="#111" stroke-width="3" />
+          <text x="112" y={y - 24} class="tm-line">{line.name}</text>
+
+          {line.stations.map((st, si) => {
+            const x = stationX[si];
+            const top = y + 40;
+            const nameLines = st.head;
+            return (
+              <g>
+                <circle cx={x} cy={y} r="15" fill="#ffffff" stroke="#111" stroke-width="5" />
+                {st.href ? (
+                  <a href={st.href} target="_blank" rel="noopener noreferrer">
+                    {nameLines.map((t, i) => (
+                      <text x={x} y={top + i * 21} text-anchor="middle" class="tm-head tm-link">{t}</text>
+                    ))}
+                  </a>
+                ) : (
+                  nameLines.map((t, i) => (
+                    <text x={x} y={top + i * 21} text-anchor="middle" class="tm-head">{t}</text>
+                  ))
+                )}
+                {st.sub.map((t, i) => (
+                  <text x={x} y={top + nameLines.length * 21 + i * 19} text-anchor="middle" class="tm-sub">{t}</text>
+                ))}
+                <text
+                  x={x}
+                  y={top + nameLines.length * 21 + st.sub.length * 19 + 2}
+                  text-anchor="middle"
+                  class="tm-date"
+                >{st.date}</text>
+              </g>
+            );
+          })}
+        </g>
+      );
+    })}
+  </svg>
+</div>
+<ul class="visually-hidden">
+  {achievementLines.flatMap((line) =>
+    line.stations.map((st) => (
+      <li>{st.head.join(' ')}, {st.sub.join(', ')}, {st.date} ({line.name})</li>
+    ))
+  )}
+</ul>

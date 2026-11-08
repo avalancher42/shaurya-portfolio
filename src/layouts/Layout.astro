@@ -31,7 +31,7 @@ const currentPath = Astro.url.pathname;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#fffdf6" />
+    <meta name="theme-color" content="#ffffff" />
     <script is:inline>
       // Loading screen should only ever play once per browser session,
       // regardless of how many times Home is revisited. This runs
@@ -49,9 +49,6 @@ const currentPath = Astro.url.pathname;
   <body>
     <header class="masthead">
       <div class="wrap masthead__row">
-        <a href="/" class="brand">
-          <span class="brand__mark">SVS</span>
-        </a>
         <nav class="nav" aria-label="Primary">
           {navItems.map((item) => (
             <a
