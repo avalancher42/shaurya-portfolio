@@ -6,6 +6,7 @@ export interface CaseRound {
 }
 
 export interface CaseCompetitionEntry {
+  id: string;
   competition: string;
   track?: string;
   image?: string;
@@ -17,6 +18,7 @@ export interface CaseCompetitionEntry {
 // publish another case competition — the page just maps over this list.
 export const caseCompetitions: CaseCompetitionEntry[] = [
   {
+    id: 'de-beers',
     competition: 'De Beers Group Consulting Challenge, Ashoka University',
     image: '/images/diamond-debeers.jpg',
     rounds: [
@@ -37,6 +39,7 @@ export const caseCompetitions: CaseCompetitionEntry[] = [
     ],
   },
   {
+    id: 'iimb',
     competition: "IIMB National Student Case Competition '26",
     track: 'Centre for Digital Public Goods · Policy & Regulation Track',
     image: '/images/terminal-iimb.jpg',
@@ -50,6 +53,7 @@ export const caseCompetitions: CaseCompetitionEntry[] = [
     ],
   },
   {
+    id: 'srcc',
     competition: 'SRCC Business Conclave 2026',
     track: 'Maestro Case Competition',
     image: '/images/cargo-srcc.jpg',
@@ -63,6 +67,7 @@ export const caseCompetitions: CaseCompetitionEntry[] = [
     ],
   },
   {
+    id: 'aethera',
     competition: 'AETHERA 2026, IIT (ISM) Dhanbad',
     track: "Sustainability Consulting Challenge (CONCETTO'26) · Finalist, Top 10 of 280+ teams nationally",
     rounds: [
@@ -75,6 +80,7 @@ export const caseCompetitions: CaseCompetitionEntry[] = [
     ],
   },
   {
+    id: 'dealplexus',
     competition: "DealPlexus × The Incubation Centre (TIC), St. Stephen's College",
     track: 'Venture Circuit · Finalist',
     rounds: [

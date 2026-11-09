@@ -1,76 +1,196 @@
 ---
-import { achievementLines } from '../data/achievements';
+import { branches, startStation, hub, blurFrom, blurTo } from '../data/achievements';
 
-const rowY = [110, 275, 440];      // one horizontal line per group
-const stationX = [260, 560];       // first and second station along each line
-const endX = 730;
-const W = 790;
-const H = 580;
+// Geometry (SVG user units)
+const SX = 70;                 // plain start station x
+const HX = 330;                // interchange x
+const HY = 310;                // interchange y (the whole entry line sits on this)
+const rowY = [90, 235, 385, 520];
+const stationX = [530, 670, 810, 950];
+const W = 1080;
+const H = 640;
+
+// Everything the side panel needs, keyed by station id (read by the script).
+const payload = Object.fromEntries(
+  branches.flatMap((b) =>
+    b.stations.map((st) => [
+      st.id,
+      {
+        name: st.name,
+        institution: st.institution ?? '',
+        year: st.year,
+        overview: st.overview,
+        highlights: st.highlights,
+        cta: st.cta ?? null,
+        lineName: b.name,
+        colour: b.colour,
+        chipText: b.chipText,
+      },
+    ])
+  )
+);
 ---
-<div class="transit-scroll">
-  <svg
-    class="transit-map"
-    viewBox={`0 0 ${W} ${H}`}
-    role="img"
-    aria-label="Transit-style map of achievements: three lines, red for national finals, yellow for semifinals and podium places, green for credentials and awards."
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    {achievementLines.map((line, li) => {
-      const y = rowY[li];
-      return (
-        <g>
-          {/* the line itself: a 45 degree bend in, then straight */}
-          <path
-            d={`M 46 ${y + 52} L 98 ${y} L ${endX} ${y}`}
-            fill="none"
-            stroke={line.colour}
-            stroke-width="14"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          {/* line roundel and name */}
-          <circle cx="46" cy={y + 52} r="13" fill={line.colour} stroke="#111" stroke-width="3" />
-          <text x="112" y={y - 24} class="tm-line">{line.name}</text>
+<div class="transit-wrap" data-transit>
+  <div class="transit-scroll">
+    <div class="transit-stage">
+      <svg
+        class="transit-map"
+        viewBox={`0 0 ${W} ${H}`}
+        role="group"
+        aria-label="Metro map of achievements. A line starts at Loyola School, Jamshedpur, blurs through earlier years, and comes into focus at St. Xavier's College, where it splits into four lines: National Finals, Semifinals and Finalists, Certifications, and Academic. Each station opens a side panel with details."
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <linearGradient id="pc-grad" gradientUnits="userSpaceOnUse" x1={SX} y1="0" x2={HX} y2="0">
+            <stop offset="0" stop-color={blurFrom} />
+            <stop offset="1" stop-color={blurTo} />
+          </linearGradient>
+          <linearGradient id="fade-out" gradientUnits="userSpaceOnUse" x1={SX} y1="0" x2={HX} y2="0">
+            <stop offset="0" stop-color="#ffffff" />
+            <stop offset="1" stop-color="#000000" />
+          </linearGradient>
+          <linearGradient id="fade-in" gradientUnits="userSpaceOnUse" x1={SX} y1="0" x2={HX} y2="0">
+            <stop offset="0" stop-color="#000000" />
+            <stop offset="1" stop-color="#ffffff" />
+          </linearGradient>
+          <mask id="m-blur" maskUnits="userSpaceOnUse" x={SX - 20} y={HY - 60} width={HX - SX + 40} height="120">
+            <rect x={SX - 20} y={HY - 60} width={HX - SX + 40} height="120" fill="url(#fade-out)" />
+          </mask>
+          <mask id="m-sharp" maskUnits="userSpaceOnUse" x={SX - 20} y={HY - 60} width={HX - SX + 40} height="120">
+            <rect x={SX - 20} y={HY - 60} width={HX - SX + 40} height="120" fill="url(#fade-in)" />
+          </mask>
+          <filter id="pc-blur" filterUnits="userSpaceOnUse" x={SX - 20} y={HY - 60} width={HX - SX + 40} height="120">
+            <feGaussianBlur stdDeviation="7" />
+          </filter>
+        </defs>
 
-          {line.stations.map((st, si) => {
+        {/* Blurred stretch: unspecified pre-college achievements, intentionally unlabelled. */}
+        <g class="pre-college" aria-hidden="true">
+          <path d={`M ${SX} ${HY} L ${HX} ${HY}`} stroke="url(#pc-grad)" stroke-width="16" stroke-linecap="round" fill="none" filter="url(#pc-blur)" mask="url(#m-blur)" />
+          <path d={`M ${SX} ${HY} L ${HX} ${HY}`} stroke="url(#pc-grad)" stroke-width="16" stroke-linecap="round" fill="none" mask="url(#m-sharp)" />
+        </g>
+
+        {/* Plain, named starting station (same dot as every other station, no icon). */}
+        <g class="plain-station" role="img" aria-label={startStation.name}>
+          <circle cx={SX} cy={HY} r="15" class="station__dot" />
+          {startStation.lines.map((t, i) => (
+            <text x={SX} y={HY + 42 + i * 18} text-anchor="middle" class="sm-name">{t}</text>
+          ))}
+        </g>
+
+        {/* The four branch lines */}
+        {branches.map((b, bi) => {
+          const y = rowY[bi];
+          const end = stationX[b.stations.length - 1] + 50;
+          return (
+            <path
+              class="branch dimmable"
+              data-line-id={b.id}
+              d={`M ${HX} ${HY} C ${HX + 72} ${HY}, ${HX + 62} ${y}, ${HX + 138} ${y} L ${end} ${y}`}
+              stroke={b.colour}
+              stroke-width="14"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+            />
+          );
+        })}
+
+        {branches.map((b, bi) => (
+          <text x={HX + 148} y={rowY[bi] - 28} class="sm-line dimmable" data-line-id={b.id}>{b.name}</text>
+        ))}
+
+        {/* Interchange: a larger ring */}
+        <g class="interchange">
+          <circle cx={HX} cy={HY} r="28" class="hub__ring" />
+          <text x={HX + 16} y={HY + 70} text-anchor="end" class="sm-hub">{hub.name}</text>
+          <text x={HX + 16} y={HY + 90} text-anchor="end" class="sm-sub">{hub.sub}</text>
+        </g>
+
+        {/* Stations: real, focusable DOM groups */}
+        {branches.map((b, bi) =>
+          b.stations.map((st, si) => {
             const x = stationX[si];
-            const top = y + 40;
-            const nameLines = st.head;
+            const y = rowY[bi];
             return (
-              <g>
-                <circle cx={x} cy={y} r="15" fill="#ffffff" stroke="#111" stroke-width="5" />
-                {st.href ? (
-                  <a href={st.href} target="_blank" rel="noopener noreferrer">
-                    {nameLines.map((t, i) => (
-                      <text x={x} y={top + i * 21} text-anchor="middle" class="tm-head tm-link">{t}</text>
-                    ))}
-                  </a>
-                ) : (
-                  nameLines.map((t, i) => (
-                    <text x={x} y={top + i * 21} text-anchor="middle" class="tm-head">{t}</text>
-                  ))
-                )}
-                {st.sub.map((t, i) => (
-                  <text x={x} y={top + nameLines.length * 21 + i * 19} text-anchor="middle" class="tm-sub">{t}</text>
+              <g
+                class="station dimmable"
+                data-station={st.id}
+                data-line-id={b.id}
+                tabindex="0"
+                role="button"
+                aria-label={`${st.name}, ${st.year}. ${b.name} line. Opens details.`}
+              >
+                <circle cx={x} cy={y} r="30" fill="transparent" />
+                <circle cx={x} cy={y} r="15" class="station__dot" />
+                {st.label.map((t, i) => (
+                  <text x={x} y={y + 42 + i * 18} text-anchor="middle" class="sm-name">{t}</text>
                 ))}
-                <text
-                  x={x}
-                  y={top + nameLines.length * 21 + st.sub.length * 19 + 2}
-                  text-anchor="middle"
-                  class="tm-date"
-                >{st.date}</text>
+                <text x={x} y={y + 42 + st.label.length * 18 + 2} text-anchor="middle" class="sm-year">{st.year}</text>
               </g>
             );
-          })}
-        </g>
-      );
-    })}
-  </svg>
+          })
+        )}
+      </svg>
+
+      <div class="transit-legend" role="group" aria-label="Legend">
+        <p class="transit-legend__title">Legend</p>
+        <ul class="transit-legend__lines">
+          {branches.map((b) => (
+            <li>
+              <button type="button" class="legend-line" data-legend-line={b.id} aria-pressed="false">
+                <span class="legend-swatch" style={`background:${b.colour}`}></span>{b.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <button type="button" class="legend-all" data-legend-all aria-pressed="true">Show all</button>
+        <div class="transit-legend__key">
+          <span class="key-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6" fill="#fff" stroke="#1a1a1a" stroke-width="2.6" /></svg>
+            Station
+          </span>
+          <span class="key-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="#fff" stroke="#0F3D56" stroke-width="4" /></svg>
+            Interchange
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="station-scrim" data-scrim></div>
+  <aside class="station-panel" data-panel role="dialog" aria-modal="true" aria-labelledby="sp-title" aria-hidden="true" tabindex="-1">
+    <div class="sp-head">
+      <span class="sp-chip" data-f="chip"></span>
+      <button type="button" class="sp-close" data-close aria-label="Close panel">
+        <span>Close</span>
+        <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 3 L17 17 M17 3 L3 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+      </button>
+    </div>
+    <h3 class="sp-title" id="sp-title" data-f="name"></h3>
+    <p class="sp-meta" data-f="meta"></p>
+    <hr class="sp-rule" />
+    <h4 class="sp-h">Overview</h4>
+    <p class="sp-overview" data-f="overview"></p>
+    <h4 class="sp-h">Key Highlights</h4>
+    <ul class="sp-highlights" data-f="highlights"></ul>
+    <a class="sp-cta" data-f="cta" hidden></a>
+  </aside>
+
+  <script is:inline type="application/json" data-station-data set:html={JSON.stringify(payload)}></script>
+
+  <ul class="visually-hidden">
+    {branches.flatMap((b) =>
+      b.stations.map((st) => (
+        <li>{st.name}{st.institution ? `, ${st.institution}` : ''}, {st.year} ({b.name}). {st.overview} {st.highlights.join('. ')}.</li>
+      ))
+    )}
+  </ul>
 </div>
-<ul class="visually-hidden">
-  {achievementLines.flatMap((line) =>
-    line.stations.map((st) => (
-      <li>{st.head.join(' ')}, {st.sub.join(', ')}, {st.date} ({line.name})</li>
-    ))
-  )}
-</ul>
+
+<script>
+  import { initStationMap } from '../scripts/stationMap.js';
+  initStationMap();
+  document.addEventListener('astro:page-load', () => initStationMap());
+</script>

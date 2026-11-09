@@ -22,7 +22,7 @@ import { showPaintings } from '../data/site';
     <div class="wrap">
       <div class="card-grid card-grid--two">
         {caseCompetitions.map((entry) => (
-          <div class={`card card--image${entry.rounds.length > 1 ? ' card--wide' : ''}`}>
+          <div id={entry.id} class={`card card--image${entry.rounds.length > 1 ? ' card--wide' : ''}`}>
             {showPaintings && entry.image && <div class="card__bg" style={`background-image:url('${entry.image}')`} aria-hidden="true"></div>}
             <p class="eyebrow" style="margin-bottom:0.6em;">
               {entry.competition}{entry.track ? ` · ${entry.track}` : ''}
